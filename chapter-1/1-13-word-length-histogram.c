@@ -20,6 +20,7 @@ int main() {
 
   f = l = max_f = 0;
 
+  /* count word lengths as we collect input */
   while((c = getchar()) != EOF) {
     if (c == ' ' || c == '\n' || c =='\t') {
       /* stop word lenght count, update word length data */
@@ -37,7 +38,16 @@ int main() {
     }
   }
 
+  /* print header area */
+  printf("word length frequencies\n  ");
+  for (j = 0; j < MAX_LENGTH + 1; ++j) {
+    putchar('-');
+  }
+  putchar('\n');
+
+  /* print histogram data */
   for (i = 0; i < max_f; ++i) {
+    printf("%d|", max_f - i);
     for (j = 0; j < MAX_LENGTH; ++j) {
       if (wlen[j] == (max_f - i)) {
         putchar('x');
@@ -47,15 +57,17 @@ int main() {
         putchar(' ');
       }
     }
-    putchar('\n');
+    printf(" |\n");
   }
-  for (j = 0; j < MAX_LENGTH; ++j) {
+
+  /* print footer area */
+  printf("  ");
+  for (j = 0; j < MAX_LENGTH + 1; ++j) {
     putchar('-');
   }
-  putchar('\n');
-  for (j = 0; j < MAX_LENGTH - 1; ++j) {
-    putchar('1' + j);
+  printf("\n  ");
+  for (j = 1; j <= MAX_LENGTH; ++j) {
+    printf("%d", j);
   }
-  printf("10+\n");
-  printf("word length\n");
+  printf("+\n     length\n");
 }
